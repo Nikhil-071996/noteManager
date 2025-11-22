@@ -23,7 +23,7 @@ const allowedUrl = process.env.ALLOWED_URL || "http://localhost:5173";
 // SOCKET.IO SETUP
 const io = new Server(server, {
   cors: {
-    origin: [allowedUrl, "http://192.168.0.231:5173"],
+    origin: [allowedUrl],
     credentials: true,
   },
 });
