@@ -1,0 +1,42 @@
+.add-section {
+    margin-top: 30px;
+}
+
+.add-container{
+    background-color: var(--bg);
+    padding: 30px 24px;
+    width: 75%;
+    max-width: 400px;
+    border-radius: 15px;
+    margin: 0 auto;
+}
+
+.add-container form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.add-container form input{
+    padding: 10px 12px;  
+    border-radius: 5px;  
+    border: 1px solid var(--ring);
+    outline: none;
+}
+
+.add-container form textarea{
+    padding: 10px 12px;  
+    border-radius: 5px;  
+    border: 1px solid var(--ring);
+    outline: none;
+}
+
+.add-container form button{
+    background-color: var(--primary);
+}
+
+.add-container form button:hover{
+    background-color: var(--primary-600);
+}
