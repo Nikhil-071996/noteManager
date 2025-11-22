@@ -12,7 +12,6 @@ const generateToken = (res, userId) => {
     secure: isProduction,             // secure only on HTTPS (production)
     sameSite: isProduction ? "none" : "lax", 
     maxAge: 3 * 24 * 60 * 60 * 1000,
-    domain: isProduction ? process.env.COOKIE_DOMAIN : undefined, // only set in production
     path: "/",
   });
 
