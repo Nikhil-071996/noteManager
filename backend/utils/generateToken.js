@@ -11,7 +11,6 @@ const generateToken = (res, userId) => {
     secure: true,             // secure only on HTTPS (production)
     sameSite: "none", 
     maxAge: 3 * 24 * 60 * 60 * 1000,
-    path: "/",
   });
 
   return token;
