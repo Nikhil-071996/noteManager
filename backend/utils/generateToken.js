@@ -5,12 +5,11 @@ const generateToken = (res, userId) => {
     expiresIn: "3d",
   });
 
-  const isProduction = process.env.NODE_ENV === "production";
 
   res.cookie("jwt", token, {
     httpOnly: true,
-    secure: isProduction,             // secure only on HTTPS (production)
-    sameSite: isProduction ? "none" : "lax", 
+    secure: true,             // secure only on HTTPS (production)
+    sameSite: "none", 
     maxAge: 3 * 24 * 60 * 60 * 1000,
     path: "/",
   });
