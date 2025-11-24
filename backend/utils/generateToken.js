@@ -9,9 +9,9 @@ const generateToken = (res, userId) => {
 
   res.cookie("jwt", token, {
     httpOnly: true,
-    secure: isProduction,                   
-    sameSite: isProduction ? "none" : "lax",
-    domain: isProduction ? ".vercel.app" : undefined,  
+    secure: true,                   
+    sameSite: "none",
+    domain: ".vercel.app",
     path: "/",                                
     maxAge: 3 * 24 * 60 * 60 * 1000,          
   });
