@@ -29,8 +29,8 @@
 
 /* === Modal Content === */
 .share-content {
-  width: 100%;
-  max-width: 520px;
+  width: 95%;
+  max-width: 650px;
   background: var(--card-bg, #fff);
   border-radius: 12px;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
@@ -68,7 +68,7 @@ legend.note-desc {
 }
 
 .shared-with-name{
-  font-size: 14px;
+  flex: 1;
 }
 
 .change-access{
@@ -141,6 +141,14 @@ fieldset.card input[type="radio"] {
   background: #f3f4f6;
 }
 
+.shared-people-list{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
 
 
 /* === Animations === */
@@ -161,10 +169,17 @@ fieldset.card input[type="radio"] {
 }
 
 /* === Responsive adjustments === */
-@media (max-width: 480px) {
+@media (max-width: 990px) {
   .share-content {
-    width: 90%;
     padding: 16px;
+  }
+
+  .shared-people-list{
+    flex-wrap: wrap;
+  }
+
+  .shared-with-name{
+    flex: 1 1 100%;
   }
 
   #share-title {

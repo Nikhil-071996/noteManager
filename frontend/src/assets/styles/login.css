@@ -18,7 +18,7 @@
 .login-container .login-card{
     background-color: var(--bg);
     padding: 30px 24px;
-    width: 75%;
+    width: 85%;
     max-width: 400px;
     border-radius: 15px;
 }
@@ -36,6 +36,7 @@
     border-radius: 5px;  
     border: 1px solid var(--ring);
     outline: none;
+    width: 100%;
 }
 
 .login-container .login-card form button{

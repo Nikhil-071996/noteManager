@@ -6,21 +6,34 @@ export default function EditTodoModal({ item, user, onClose, onUpdated, viewOnly
   const [title, setTitle] = useState("");
   const [items, setItems] = useState([{ text: "", completed: false }]);
   const titleRef = useRef(null);
+  const itemRefs = useRef([]);
 
+  // Load selected todo
   useEffect(() => {
     if (item) {
       setTitle(item.title || "");
       setItems(
-        item.items?.length
-          ? item.items
-          : [{ text: "", completed: false }]
+        item.items?.length ? item.items : [{ text: "", completed: false }]
       );
     }
   }, [item]);
 
+  // Auto focus title initially
   useEffect(() => {
     titleRef.current?.focus();
   }, []);
+
+  // Auto focus new or remaining item input whenever length changes
+  useEffect(() => {
+    if (items.length === 0) {
+      titleRef.current?.focus();
+      return;
+    }
+
+    const lastIndex = items.length - 1;
+    const el = itemRefs.current[lastIndex];
+    el?.focus();
+  }, [items.length]);
 
   const updateItemText = (index, value) => {
     setItems((prev) =>
@@ -41,7 +54,11 @@ export default function EditTodoModal({ item, user, onClose, onUpdated, viewOnly
   };
 
   const removeItem = (index) => {
-    setItems((prev) => prev.filter((_, i) => i !== index));
+    setItems((prev) => {
+      const updated = prev.filter((_, i) => i !== index);
+      itemRefs.current.splice(index, 1);
+      return updated;
+    });
   };
 
   const handleSave = async (e) => {
@@ -95,10 +112,14 @@ export default function EditTodoModal({ item, user, onClose, onUpdated, viewOnly
             {items.map((it, idx) => (
               <div
                 key={idx}
-                style={{ display: "flex", gap: 8, alignItems: "center", justifyContent: 'space-between' }}
+                style={{
+                  display: "flex",
+                  gap: 8,
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
               >
                 <div className="inputs-content">
-                  {/* Checkbox */}
                   <input
                     type="checkbox"
                     checked={!!it.completed}
@@ -106,43 +127,48 @@ export default function EditTodoModal({ item, user, onClose, onUpdated, viewOnly
                     onChange={() => toggleCompleted(idx)}
                   />
 
-                  {/* Text */}
                   <input
                     className="input"
                     value={it.text}
                     placeholder={`Item ${idx + 1}`}
                     disabled={viewOnly}
                     onChange={(e) => updateItemText(idx, e.target.value)}
+                    ref={(el) => (itemRefs.current[idx] = el)}
                   />
                 </div>
 
-                {/* Remove button */}
-                <button
-                  type="button"
-                  className="btn link-btn"
-                  disabled={viewOnly}
-                  onClick={() => removeItem(idx)}
-                >
-                  Remove
-                </button>
+                {!viewOnly && (
+                  <button
+                    type="button"
+                    className="btn link-btn"
+                    onClick={() => removeItem(idx)}
+                  >
+                    Remove
+                  </button>
+                )}
               </div>
             ))}
-
           </div>
+
+          {!viewOnly && (
             <button
               type="button"
               className="btn link-btn"
-              disabled={viewOnly}
               onClick={addItem}
             >
               + Add item
             </button>
+          )}
 
           <div className="btn-containers">
             <button type="button" className="btn link-btn" onClick={onClose}>
               Cancel
             </button>
-            {!viewOnly && <button className="btn" onClick={handleSave}>Save Changes</button>}
+            {!viewOnly && (
+              <button className="btn" onClick={handleSave}>
+                Save Changes
+              </button>
+            )}
           </div>
         </form>
       </div>

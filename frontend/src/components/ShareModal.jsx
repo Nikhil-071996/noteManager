@@ -240,15 +240,9 @@ export default function ShareModal({ open, onClose, item, ownerEmail, onShare, c
                 {sharedWith.map((s) => (
                   <li
                     key={s._id}
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      gap: 8,
-                      marginBottom: 8,
-                    }}
+                    className="shared-people-list"
                   >
-                    <div style={{ flex: 1 }} className="shared-with-name">
+                    <div className="shared-with-name">
                       <strong>{s.user?.name}</strong> — {s.user?.email}
                     </div>
 
@@ -266,7 +260,7 @@ export default function ShareModal({ open, onClose, item, ownerEmail, onShare, c
                       onClick={() => handleRemoveAccess(s._id, s.user?._id)}
                       disabled={removing === s._id}
                       title="Remove access"
-                      style={{ marginLeft: 8, whiteSpace: "nowrap" }}
+                      style={{whiteSpace: "nowrap" }}
                     >
                       {removing === s._id ? "Removing…" : "Remove access"}
                     </button>

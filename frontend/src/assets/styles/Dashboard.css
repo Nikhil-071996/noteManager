@@ -207,7 +207,7 @@ button {
 .edit-modal {
   background: #fff;
   border-radius: 12px;
-  width: 75%;
+  width: 95%;
   max-width: 400px;
   height: 400px;
   padding: 24px;
@@ -254,7 +254,6 @@ button {
 }
 
 .todo-list-input{
-  height: 50%;
   overflow-y: auto;
 }
 
