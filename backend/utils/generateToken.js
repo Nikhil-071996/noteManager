@@ -5,12 +5,15 @@ const generateToken = (res, userId) => {
     expiresIn: "3d",
   });
 
+  const isProduction = process.env.NODE_ENV === "production";
 
   res.cookie("jwt", token, {
     httpOnly: true,
-    secure: true,             
-    sameSite: "none", 
-    maxAge: 3 * 24 * 60 * 60 * 1000,
+    secure: isProduction,                   
+    sameSite: isProduction ? "none" : "lax",
+    domain: isProduction ? ".vercel.app" : undefined,  
+    path: "/",                                
+    maxAge: 3 * 24 * 60 * 60 * 1000,          
   });
 
   return token;
