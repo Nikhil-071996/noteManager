@@ -78,16 +78,6 @@ io.on("connection", (socket) => {
   });
 
 
-  // socket.on("join_note", (noteId) => {
-  //   console.log("JoinedNotes", noteId)
-  //   socket.join(noteId);
-  // });
-
-  // socket.on("leave_note", (noteId) => {
-  //   socket.leave(noteId);
-  // });
-
-
   socket.on("note_live_update", (data) => {
     socket.to(data.roomId).emit("note_live_apply", data);
   });
@@ -98,5 +88,5 @@ io.on("connection", (socket) => {
 
 
 server.listen(port, () =>
-  console.log(`Server is running on port ${port}`)
+  console.log(`Server is running sucessfully on port ${port}`)
 );
