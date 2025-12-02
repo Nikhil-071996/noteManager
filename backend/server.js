@@ -39,15 +39,17 @@ app.use((req, res, next) => {
 
 db();
 
+app.set("trust proxy", 1);
+
 // middleware
 app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: [
-      "https://note-manager-delta.vercel.app",   // frontend
-    ],
+    origin: "https://note-manager-delta.vercel.app", 
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
